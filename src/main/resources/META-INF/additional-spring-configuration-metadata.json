@@ -1,0 +1,22 @@
+{"properties": [
+  {
+    "name": "clients.user-service.host",
+    "type": "java.lang.String",
+    "description": "Hostname or IP address of the User Service."
+  },
+  {
+    "name": "clients.user-service.port",
+    "type": "java.lang.String",
+    "description": "Port used to connect to the User Service."
+  },
+  {
+    "name": "clients.product-service.host",
+    "type": "java.lang.String",
+    "description": "Hostname or IP address of the Product Service."
+  },
+  {
+    "name": "clients.product-service.port",
+    "type": "java.lang.String",
+    "description": "Port used to connect to the Product Service."
+  }
+]}
