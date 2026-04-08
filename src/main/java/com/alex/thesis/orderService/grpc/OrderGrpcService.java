@@ -1,8 +1,12 @@
 package com.alex.thesis.orderService.grpc;
 
 import com.alex.thesis.orderService.entity.Order;
-import com.alex.thesis.orderService.grpc.OrderServiceGrpc.OrderServiceImplBase;
 import com.alex.thesis.orderService.service.OrderBusinessService;
+import com.alex.thesis.proto.order.v1.CreateOrderRequest;
+import com.alex.thesis.proto.order.v1.CreateOrderResponse;
+import com.alex.thesis.proto.order.v1.GetOrderByIdRequest;
+import com.alex.thesis.proto.order.v1.GetOrderByIdResponse;
+import com.alex.thesis.proto.order.v1.OrderServiceGrpc.OrderServiceImplBase;
 
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
