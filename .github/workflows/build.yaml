@@ -11,11 +11,9 @@ on:
 
 jobs:
   build:
-  #Test for CI
     runs-on: ubuntu-latest
 
     steps:
-      #Test to test CI
       - name: Checkout Order Service Repo
         uses: actions/checkout@v2
 
