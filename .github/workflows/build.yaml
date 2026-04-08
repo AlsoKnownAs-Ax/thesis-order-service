@@ -1,0 +1,40 @@
+name: Build Java Order Service with gRPC
+
+on:
+  push: 
+    branches: 
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      #Test to test CI
+      - name: Checkout Order Service Repo
+        uses: actions/checkout@v2
+
+      - name: Checkout gRPC Contracts
+        uses: actions/checkout@v2
+        with:
+          repository: AlsoKnownAs-Ax/thesis-proto-contracts
+          path: grpc-contracts
+
+      - name: Set up Java SDK 21
+        uses: adoptium/setup-java@v2
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Install deps
+        run: mvn install -DskipTests
+
+      - name: Generate gRPC Java stubs from Protobufs
+        run: mvn clean compile
+
+      - name: Build Service
+        run: mvn package -DskipTests
