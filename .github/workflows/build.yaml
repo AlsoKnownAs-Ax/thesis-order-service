@@ -32,8 +32,8 @@ jobs:
       - name: Install deps
         run: mvn install -DskipTests
 
-      - name: Generate gRPC Java stubs from Protobufs
-        run: mvn clean compile
+      - name: Generate gRPC Java stubs from Remote Protobufs
+        run: mvn -Prefresh-proto clean compile
 
       - name: Build Service
         run: mvn package -DskipTests
