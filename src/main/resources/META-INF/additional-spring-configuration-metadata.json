@@ -18,5 +18,25 @@
     "name": "clients.product-service.port",
     "type": "java.lang.String",
     "description": "Port used to connect to the Product Service."
+  },
+  {
+    "name": "grpc.client.productService.negotiationType",
+    "type": "java.lang.String",
+    "description": "Negotiation type for gRPC connection to Product Service (e.g., PLAIN_TEXT, TLS)."
+  },
+  {
+    "name": "grpc.client.productService.address",
+    "type": "java.lang.String",
+    "description": "gRPC server address for Product Service (e.g., localhost:9090)."
+  },
+  {
+    "name": "grpc.client.userService.address",
+    "type": "java.lang.String",
+    "description": "gRPC server address for User Service (e.g., localhost:9091)."
+  },
+  {
+    "name": "grpc.client.userService.negotiationType",
+    "type": "java.lang.String",
+    "description": "Negotiation type for gRPC connection to User Service (e.g., PLAIN_TEXT, TLS)."
   }
 ]}

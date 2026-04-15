@@ -1,5 +1,8 @@
 package com.alex.thesis.orderService.grpc;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.alex.thesis.orderService.entity.Order;
 import com.alex.thesis.orderService.service.OrderBusinessService;
 import com.alex.thesis.proto.order.v1.CreateOrderRequest;
@@ -13,7 +16,9 @@ import net.devh.boot.grpc.server.service.GrpcService;
 
 @GrpcService
 public class OrderGrpcService extends OrderServiceImplBase {
-    
+
+    private static final Logger log = LoggerFactory.getLogger(OrderGrpcService.class);
+
     private final OrderBusinessService orderBusinessService;
 
     public OrderGrpcService(OrderBusinessService orderBusinessService){
@@ -44,6 +49,9 @@ public class OrderGrpcService extends OrderServiceImplBase {
 
     @Override
     public void createOrder(CreateOrderRequest request, StreamObserver<CreateOrderResponse> responObserver){
+        log.info("gRPC CreateOrder received userId={}, productId={}, quantity={}",
+            request.getUserId(), request.getProductId(), request.getQuantity());
+
         try {
             Order order = orderBusinessService.createOrder(
                 request.getUserId(),
@@ -58,9 +66,12 @@ public class OrderGrpcService extends OrderServiceImplBase {
                 .setMessage("Order created successfully")
                 .build();
 
+            log.info("gRPC CreateOrder success orderId={}, status={}", order.getId(), order.getStatus());
             responObserver.onNext(response);
             responObserver.onCompleted();
         } catch (Exception e) {
+            log.error("gRPC CreateOrder failed userId={}, productId={}, quantity={}",
+                request.getUserId(), request.getProductId(), request.getQuantity(), e);
             responObserver.onError(e);
         }
     }
