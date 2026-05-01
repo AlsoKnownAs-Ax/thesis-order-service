@@ -1,0 +1,24 @@
+services:
+  order-service:
+    container_name: thesis-order-service
+    image: thesis-order-service:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "9093:9093"
+    restart: unless-stopped
+    networks:
+      thesis-net:
+        aliases:
+          - order-service
+    environment:
+      - TZ=UTC
+      - SPRING_DATASOURCE_URL=jdbc:sqlite:/app/orderdb.db
+    volumes:
+      - ./orderdb.db:/app/orderdb.db
+
+networks:
+  thesis-net:
+    external: true
+    name: thesis-net

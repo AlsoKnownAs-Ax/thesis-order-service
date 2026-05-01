@@ -1,0 +1,17 @@
+# Maven build output
+target/
+generated-sources/
+
+# IDE & editor
+.vscode/
+.idea/
+*.iml
+
+# Git
+.git
+.gitignore
+
+# Local dev files
+.env
+docker-compose.yaml
+.DS_Store
