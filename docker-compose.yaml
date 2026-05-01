@@ -15,6 +15,7 @@ services:
     environment:
       - TZ=UTC
       - SPRING_DATASOURCE_URL=jdbc:sqlite:/app/orderdb.db
+      - SPRING_PROFILES_ACTIVE=docker
     volumes:
       - ./orderdb.db:/app/orderdb.db
 

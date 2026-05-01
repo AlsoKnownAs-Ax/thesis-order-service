@@ -31,9 +31,6 @@ public class DownstreamFacade implements IDownstreamFacade {
     public void validateActiveUser(String userId) {
         ValidateUserResponse response = userService.validateUser(userId);
         log.info("Validate user Response: " + response.toString());
-        if(!response.getExists()){
-            throw new IllegalArgumentException("User does not exist:" + userId);
-        }
         if(!response.getIsActive()){
             throw new IllegalArgumentException("User is not active: " + userId);
         }
