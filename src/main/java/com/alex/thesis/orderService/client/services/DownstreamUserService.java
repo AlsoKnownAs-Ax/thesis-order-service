@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.alex.thesis.orderService.client.utils.CallResult;
 import com.alex.thesis.orderService.client.utils.SafeCall;
+import com.alex.thesis.orderService.exception.UserNotFoundException;
 import com.alex.thesis.proto.user.v1.ValidateUserRequest;
 import com.alex.thesis.proto.user.v1.ValidateUserResponse;
 
@@ -28,7 +29,7 @@ public class DownstreamUserService {
             error -> {
                 if (error instanceof StatusRuntimeException e
                     && e.getStatus().getCode() == Status.Code.INVALID_ARGUMENT) {
-                    return new IllegalArgumentException("User does not exist: " + userId, e);
+                    return new UserNotFoundException("User does not exist: " + userId, e);
                 }
                 
                 return error;

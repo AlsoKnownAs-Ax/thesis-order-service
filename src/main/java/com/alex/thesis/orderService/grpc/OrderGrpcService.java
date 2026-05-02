@@ -43,7 +43,7 @@ public class OrderGrpcService extends OrderServiceImplBase {
             responseObserver.onNext(response);
             responseObserver.onCompleted();
         } catch (Exception e) {
-            responseObserver.onError(e);
+            responseObserver.onError(GrpcExceptionMapper.toGrpcException(e));
         }
     }
 
@@ -72,7 +72,7 @@ public class OrderGrpcService extends OrderServiceImplBase {
         } catch (Exception e) {
             log.error("gRPC CreateOrder failed userId={}, productId={}, quantity={}",
                 request.getUserId(), request.getProductId(), request.getQuantity(), e);
-            responObserver.onError(e);
+            responObserver.onError(GrpcExceptionMapper.toGrpcException(e));
         }
     }
 }

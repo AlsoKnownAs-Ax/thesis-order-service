@@ -6,6 +6,9 @@ import org.springframework.stereotype.Service;
 
 import com.alex.thesis.orderService.client.services.DownstreamProductService;
 import com.alex.thesis.orderService.client.services.DownstreamUserService;
+import com.alex.thesis.orderService.exception.InsufficientStockException;
+import com.alex.thesis.orderService.exception.ProductNotFoundException;
+import com.alex.thesis.orderService.exception.UserNotActiveException;
 import com.alex.thesis.proto.product.v1.CheckAvailabilityResponse;
 import com.alex.thesis.proto.product.v1.GetProductByIdResponse;
 import com.alex.thesis.proto.product.v1.Product;
@@ -32,7 +35,7 @@ public class DownstreamFacade implements IDownstreamFacade {
         ValidateUserResponse response = userService.validateUser(userId);
         log.info("Validate user Response: " + response.toString());
         if(!response.getIsActive()){
-            throw new IllegalArgumentException("User is not active: " + userId);
+            throw new UserNotActiveException("User is not active: " + userId);
         }
     }
 
@@ -40,7 +43,7 @@ public class DownstreamFacade implements IDownstreamFacade {
     public double getUnitPriceOrThrow(String productId) {
         GetProductByIdResponse response = productService.getProductById(productId);
         if(!response.hasProduct()){
-            throw new IllegalArgumentException("Product not found: " + productId);
+            throw new ProductNotFoundException("Product not found: " + productId);
         }
         Product product = response.getProduct();
         return product.getPrice();
@@ -50,7 +53,7 @@ public class DownstreamFacade implements IDownstreamFacade {
     public void ensureProductAvailability(String productId, int quantity) {
         CheckAvailabilityResponse response = productService.checkAvailability(productId, quantity);
         if(!response.getIsAvailable()){
-            throw new IllegalArgumentException(
+            throw new InsufficientStockException(
                 "Insufficient stock for product" + productId + ", available=" + response.getAvailableQuantity()
             );
         }

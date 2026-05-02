@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.alex.thesis.orderService.client.DownstreamFacade;
+import com.alex.thesis.orderService.exception.OrderNotFoundException;
 import com.alex.thesis.orderService.entity.Order;
 import com.alex.thesis.orderService.repository.OrderRepository;
 
@@ -48,6 +49,6 @@ public class OrderBusinessService {
 
     public Order getOrderById(Long orderId){
         return orderRepository.findById(orderId)
-                .orElseThrow(() -> new RuntimeException("Order not found"));
+                .orElseThrow(() -> new OrderNotFoundException("Order not found: " + orderId));
     }
 }
