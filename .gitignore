@@ -35,3 +35,4 @@ build/
 ### Remote Protos ###
 proto/
 TODO.md
+*.db
