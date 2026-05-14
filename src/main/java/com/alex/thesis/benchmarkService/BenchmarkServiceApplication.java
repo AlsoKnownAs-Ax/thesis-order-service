@@ -1,13 +1,13 @@
-package com.alex.thesis.orderService;
+package com.alex.thesis.benchmarkService;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class OrderServiceApplication {
+public class BenchmarkServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(OrderServiceApplication.class, args);
+		SpringApplication.run(BenchmarkServiceApplication.class, args);
 	}
 
 }

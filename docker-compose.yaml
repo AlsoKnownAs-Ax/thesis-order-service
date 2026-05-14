@@ -1,7 +1,7 @@
 services:
-  order-service:
-    container_name: thesis-order-service
-    image: thesis-order-service:latest
+  benchmark-service:
+    container_name: thesis-benchmark-service
+    image: thesis-benchmark-service:latest
     build:
       context: .
       dockerfile: Dockerfile
@@ -11,7 +11,7 @@ services:
     networks:
       thesis-net:
         aliases:
-          - order-service
+          - benchmark-service
     environment:
       - TZ=UTC
       - SPRING_PROFILES_ACTIVE=docker
